@@ -1,0 +1,15 @@
+# dependencies
+node_modules/
+
+# env files
+.env
+
+# builds
+build/
+dist/
+
+# ignore only ML datasets
+server/ml/*.csv
+server/ml/*.xlsx
+server/ml/*.json
+server/ml/*.zip
