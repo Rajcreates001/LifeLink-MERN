@@ -10,6 +10,7 @@ import HospitalPatients from '../components/HospitalPatients';
 import HospitalResources from '../components/HospitalResources';
 import HospitalCommunications from '../components/HospitalCommunications';
 import MyHospital from '../components/MyHospital';
+import AmbulanceETARoute from '../components/AmbulanceETARoute';
 
 const HospitalDashboard = () => {
     const { user } = useAuth();
@@ -32,6 +33,8 @@ const HospitalDashboard = () => {
                 return <HospitalResources />;
             case 'my-hospital':
                 return <MyHospital />;
+            case 'ambulance-eta':
+                return <AmbulanceETARoute currentHospitalId={user?._id || user?.id} currentHospitalName={user?.name} hospitalLocation={{lat: 12.9716, lng: 77.5946}} />;
             case 'communications':
                 return <HospitalCommunications currentHospitalId={user?._id || user?.id} currentHospitalName={user?.name} />;
             default:
@@ -83,7 +86,15 @@ const HospitalDashboard = () => {
                         onClick={() => setActiveTab('my-hospital')} 
                     />
 
-                    {/* 6. Communications */}
+                    {/* 6. Ambulance ETA & Route */}
+                    <TabButton 
+                        label="Ambulance ETA" 
+                        icon="fa-ambulance" 
+                        isActive={activeTab === 'ambulance-eta'} 
+                        onClick={() => setActiveTab('ambulance-eta')} 
+                    />
+
+                    {/* 7. Communications */}
                     <TabButton 
                         label="Communications" 
                         icon="fa-message" 

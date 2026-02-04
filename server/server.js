@@ -26,6 +26,7 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/dashboard', require('./routes/dashboardRoutes'));
 app.use('/api', require('./routes/aiRoutes'));
 app.use('/api/hospital-communication', require('./routes/hospitalCommunicationRoutes'));
+app.use('/api/ambulance', require('./routes/ambulanceETARoutes'));
 
 // --- THE FIX: Mount the router to BOTH paths ---
 app.use('/api/hospital', hospitalRoutes); // Covers HospitalAnalytics.jsx
@@ -414,7 +415,7 @@ app.post('/api/users/verify', async (req, res) => {
 });
 
 // --- 3. SERVER START ---
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on port ${PORT}`);
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, '127.0.0.1', () => {
+    console.log(`Server running on http://127.0.0.1:${PORT}`);
 });

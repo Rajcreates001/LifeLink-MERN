@@ -146,4 +146,15 @@ router.post('/hospital/inventory/predict', async (req, res) => {
     }
 });
 
+// 10. Ambulance ETA Prediction
+router.post('/ml/predict-eta', async (req, res) => {
+    try {
+        const result = await runPythonModel('predict_eta', req.body);
+        res.json(result);
+    } catch (error) {
+        console.error('ETA Prediction Error:', error.message);
+        res.status(500).json({ error: error.message });
+    }
+});
+
 module.exports = router;
