@@ -30,7 +30,7 @@ const HealthRiskCalculator = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const res = await fetch('http://localhost:3001/api/predict_health_risk', {
+            const res = await fetch('${import.meta.env.VITE_API_URL}/api/predict_health_risk', {
                 method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(formData)
             });
             const data = await res.json();

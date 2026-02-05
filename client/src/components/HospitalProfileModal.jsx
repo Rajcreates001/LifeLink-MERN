@@ -27,7 +27,7 @@ const HospitalProfileModal = ({ onClose }) => {
         const fetchDetails = async () => {
             try {
                 // We use the public endpoint to get current details
-                const res = await fetch(`http://localhost:3001/api/dashboard/public/${user.id}/full`);
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/dashboard/public/${user.id}/full`);
                 const data = await res.json();
                 
                 // Pre-fill form (Check if hospitalProfile exists, otherwise fallback to root user data)
@@ -63,7 +63,7 @@ const HospitalProfileModal = ({ onClose }) => {
             const payload = { ...formData };
             if (!payload.password) delete payload.password;
 
-            const res = await fetch(`http://localhost:3001/api/dashboard/profile/${user.id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/dashboard/profile/${user.id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)

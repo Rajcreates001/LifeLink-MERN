@@ -30,7 +30,7 @@ const MyHospital = () => {
         throw new Error('User not logged in');
       }
 
-      const response = await fetch(`http://localhost:3001/api/hospital-communication/my-hospital/${user.id}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/hospital-communication/my-hospital/${user.id}`);
       
       if (!response.ok) {
         throw new Error('Failed to fetch hospital details');
@@ -115,7 +115,7 @@ const MyHospital = () => {
 
       console.log('[MyHospital] Payload:', payload);
 
-      const response = await fetch(`http://localhost:3001/api/hospital-communication/my-hospital/${user.id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/hospital-communication/my-hospital/${user.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

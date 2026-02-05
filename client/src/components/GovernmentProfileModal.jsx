@@ -42,7 +42,7 @@ const GovernmentProfileModal = ({ onClose }) => {
             const payload = { ...formData };
             if (!payload.password) delete payload.password;
 
-            const res = await fetch(`http://localhost:3001/api/dashboard/profile/${user.id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/dashboard/profile/${user.id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)

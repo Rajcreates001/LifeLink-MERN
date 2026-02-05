@@ -12,7 +12,7 @@ const ApiTest = () => {
   const testEndpoint = async (endpoint, name) => {
     try {
       setLoading(true);
-      const url = `http://localhost:3001/api/hospital-communication${endpoint}`;
+      const url = `${import.meta.env.VITE_API_URL}/api/hospital-communication${endpoint}`;
       console.log(`Testing ${name}: ${url}`);
       
       const response = await fetch(url);

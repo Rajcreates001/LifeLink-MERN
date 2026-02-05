@@ -121,7 +121,7 @@ const HospitalCommunicationsContent = ({ currentHospitalId, currentHospitalName 
         throw new Error('Hospital ID is missing');
       }
 
-      const url = `http://localhost:3001/api/hospital-communication/list/${hospitalId}`;
+      const url = `${import.meta.env.VITE_API_URL}/api/hospital-communication/list/${hospitalId}`;
       console.log('[fetchHospitals] URL:', url);
       
       console.log('[fetchHospitals] Sending fetch request...');
@@ -184,7 +184,7 @@ const HospitalCommunicationsContent = ({ currentHospitalId, currentHospitalName 
         throw new Error('Hospital ID is missing');
       }
 
-      const url = `http://localhost:3001/api/hospital-communication/messages/${hospitalId}`;
+      const url = `${import.meta.env.VITE_API_URL}/api/hospital-communication/messages/${hospitalId}`;
       console.log('[fetchMessages] URL:', url);
       
       // Create an AbortController with 8-second timeout
@@ -232,7 +232,7 @@ const HospitalCommunicationsContent = ({ currentHospitalId, currentHospitalName 
         throw new Error('Hospital ID is missing');
       }
 
-      const url = `http://localhost:3001/api/hospital-communication/details/${hospitalId}`;
+      const url = `${import.meta.env.VITE_API_URL}/api/hospital-communication/details/${hospitalId}`;
       console.log('[fetchHospitalDetails] URL:', url);
       
       const response = await fetch(url);
@@ -297,7 +297,7 @@ const HospitalCommunicationsContent = ({ currentHospitalId, currentHospitalName 
 
       console.log('[handleSendMessage] Payload:', payload);
 
-      const response = await fetch('http://localhost:3001/api/hospital-communication/send-message', {
+      const response = await fetch('${import.meta.env.VITE_API_URL}/api/hospital-communication/send-message', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -333,7 +333,7 @@ const HospitalCommunicationsContent = ({ currentHospitalId, currentHospitalName 
       const newStatus = currentStatus === 'pending' ? 'resolved' : 'pending';
       console.log('[handleResolveMessage] Updating message:', messageId, 'to:', newStatus);
       
-      const response = await fetch(`http://localhost:3001/api/hospital-communication/message/${messageId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/hospital-communication/message/${messageId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -372,7 +372,7 @@ const HospitalCommunicationsContent = ({ currentHospitalId, currentHospitalName 
       console.log('[handleSendReply] Sending reply to message:', messageId);
       setLoading(true);
 
-      const response = await fetch(`http://localhost:3001/api/hospital-communication/message/${messageId}/reply`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/hospital-communication/message/${messageId}/reply`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

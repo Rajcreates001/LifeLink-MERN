@@ -9,7 +9,7 @@ const NotificationMenu = ({ onClose, onMarkRead }) => {
     useEffect(() => {
         const fetchNotifications = async () => {
             try {
-                const res = await fetch(`http://localhost:3001/api/dashboard/public/${user.id}/full`);
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/dashboard/public/${user.id}/full`);
                 const data = await res.json();
                 
                 const alertNotifs = (data.alerts || []).map(a => ({
@@ -58,7 +58,7 @@ const NotificationMenu = ({ onClose, onMarkRead }) => {
         const ok = window.confirm('Delete this notification?');
         if (!ok) return;
         try {
-            const res = await fetch(`http://localhost:3001/api/dashboard/notification/${type}/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/dashboard/notification/${type}/${id}`, {
                 method: 'DELETE'
             });
             if (res.ok) {

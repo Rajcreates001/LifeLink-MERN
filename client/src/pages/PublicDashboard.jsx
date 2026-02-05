@@ -7,7 +7,7 @@ import HealthRiskCalculator from '../components/HealthRiskCalculator';
 
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = SpeechRecognition ? new SpeechRecognition() : null;
-const API_BASE_URL = 'http://localhost:3001';
+const API_BASE_URL = '${import.meta.env.VITE_API_URL}';
 
 const PublicDashboard = () => {
     const { user } = useAuth();

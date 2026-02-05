@@ -23,7 +23,7 @@ const DashboardLayout = ({ children, title }) => {
             if (!user?.id) return;
             try {
                 // Adjust endpoint based on role if needed, currently using public endpoint for alerts
-                const res = await fetch(`http://localhost:3001/api/dashboard/public/${user.id}/full`); 
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/dashboard/public/${user.id}/full`); 
                 const data = await res.json();
                 const lastRead = localStorage.getItem('lastReadTime');
                 const lastReadDate = lastRead ? new Date(lastRead) : new Date(0);

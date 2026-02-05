@@ -4,7 +4,7 @@ import {
     Tooltip, ResponsiveContainer, Legend, AreaChart, Area 
 } from 'recharts';
 
-const API_BASE = 'http://localhost:3001/api';
+const API_BASE = '${import.meta.env.VITE_API_URL}/api';
 
 const HospitalAnalytics = () => {
     // --- STATE ---

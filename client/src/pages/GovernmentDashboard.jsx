@@ -17,7 +17,7 @@ const GovernmentDashboard = () => {
     useEffect(() => {
         const fetchStats = async () => {
             try {
-                const res = await fetch('http://localhost:3001/api/dashboard/admin/pending-hospitals');
+                const res = await fetch('${import.meta.env.VITE_API_URL}/api/dashboard/admin/pending-hospitals');
                 if (res.ok) {
                     const data = await res.json();
                     setStats(prev => ({ ...prev, pending: data.length }));

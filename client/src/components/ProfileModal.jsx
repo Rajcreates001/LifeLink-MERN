@@ -13,7 +13,7 @@ const ProfileModal = ({ onClose }) => {
     useEffect(() => {
         const fetchDetails = async () => {
             try {
-                const res = await fetch(`http://localhost:3001/api/dashboard/public/${user.id}/full`);
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/dashboard/public/${user.id}/full`);
                 const data = await res.json();
                 
                 setFormData({
@@ -48,7 +48,7 @@ const ProfileModal = ({ onClose }) => {
             if (!payload.password) delete payload.password;
 
             // 2. SEND DATA
-            const res = await fetch(`http://localhost:3001/api/dashboard/profile/${user.id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/dashboard/profile/${user.id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)

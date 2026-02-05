@@ -10,7 +10,7 @@ const AuthorityOutbreak = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const res = await fetch('http://localhost:3001/api/gov/predict_outbreak', {
+            const res = await fetch('${import.meta.env.VITE_API_URL}/api/gov/predict_outbreak', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(params)

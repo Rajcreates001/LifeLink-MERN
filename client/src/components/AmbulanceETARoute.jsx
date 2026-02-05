@@ -191,7 +191,7 @@ const AmbulanceETARoute = ({ currentHospitalId, currentHospitalName, hospitalLoc
     const fetchAmbulances = async () => {
         try {
             // Always fetch all ambulances (hospital filter handled on backend)
-            const url = 'http://localhost:3001/api/ambulance';
+            const url = '${import.meta.env.VITE_API_URL}/api/ambulance';
 
             const response = await fetch(url);
             
@@ -410,7 +410,7 @@ const AmbulanceETARoute = ({ currentHospitalId, currentHospitalName, hospitalLoc
 
         setLoading(true);
         try {
-            const response = await fetch(`http://localhost:3001/api/ambulance/${selectedAmbulance._id}/start-route`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/ambulance/${selectedAmbulance._id}/start-route`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -451,7 +451,7 @@ const AmbulanceETARoute = ({ currentHospitalId, currentHospitalName, hospitalLoc
             const ambulanceLat = selectedAmbulance?.currentLocation?.latitude || MANGALORE_LAT;
             const ambulanceLng = selectedAmbulance?.currentLocation?.longitude || MANGALORE_LNG;
 
-            const response = await fetch(`http://localhost:3001/api/ambulance/${ambulanceId}/predict-eta`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/ambulance/${ambulanceId}/predict-eta`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -674,7 +674,7 @@ const AmbulanceETARoute = ({ currentHospitalId, currentHospitalName, hospitalLoc
 
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:3001/api/ambulance/create', {
+            const response = await fetch('${import.meta.env.VITE_API_URL}/api/ambulance/create', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
