@@ -7,6 +7,7 @@ const runPythonModel = (command, jsonInput, scriptName = 'ai_ml.py') => {
     return new Promise((resolve, reject) => {
         const mlFolder = path.join(__dirname, '..', 'ml');
         const scriptPath = path.join(mlFolder, scriptName);
+        const pythonExec = process.env.PYTHON_PATH || 'python3';
         
         // --- FIXED LOGIC ---
         // We must ensure 'jsonInput' is always an object so Python can use .get()
@@ -28,7 +29,7 @@ const runPythonModel = (command, jsonInput, scriptName = 'ai_ml.py') => {
         // -------------------
 
         // Spawn process
-        const pythonProcess = spawn('python', [scriptPath, command, inputString], { cwd: mlFolder });
+        const pythonProcess = spawn(pythonExec, [scriptPath, command, inputString], { cwd: mlFolder });
 
         let dataString = '';
         let errorString = '';
@@ -43,8 +44,8 @@ const runPythonModel = (command, jsonInput, scriptName = 'ai_ml.py') => {
 
         pythonProcess.on('close', (code) => {
             if (code !== 0) {
-                console.error(`Python Error (${scriptName} - ${command}):`, errorString);
-                return reject(new Error(errorString || 'Python script execution failed'));
+                console.error(`Python Error (${scriptName} - ${command}):`, errorString || dataString);
+                return reject(new Error(errorString || dataString || 'Python script execution failed'));
             }
             try {
                 // Attempt to parse JSON

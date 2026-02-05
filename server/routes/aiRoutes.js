@@ -51,41 +51,19 @@ createPredictionRoute('/gov/predict_policy_segment', 'predict_policy_seg');
 createPredictionRoute('/gov/predict_performance_score', 'predict_perf_score');
 createPredictionRoute('/gov/predict_anomaly', 'predict_anomaly');
 // --- NEW ROUTE FOR AI RECORDS (FIXED PATH) ---
-router.post('/analyze_report', (req, res) => {
-    const { report_text } = req.body;
-    
-    // Using consolidated ai_ml.py
-    const pythonProcess = spawn('python', ['./ml/ai_ml.py', 'analyze_report', report_text]);
-
-    let dataString = '';
-
-    pythonProcess.stdout.on('data', (data) => {
-        dataString += data.toString();
-    });
-
-    pythonProcess.stderr.on('data', (data) => {
-        console.error(`Python Error: ${data}`);
-    });
-
-    pythonProcess.on('close', (code) => {
-        try {
-            // Check if we got empty data (which means python failed)
-            if (!dataString) {
-                throw new Error("No data received from AI engine");
-            }
-            const result = JSON.parse(dataString);
-            res.json(result);
-        } catch (e) {
-            console.error("Parse Error:", e);
-            // Send a standard error format that the frontend expects
-            res.json({ 
-                error: "AI Engine Failed. Please check the backend terminal for details.",
-                risk_level: "Error",
-                risk_score: 0,
-                summary: "System could not process the report."
-            });
-        }
-    });
+router.post('/analyze_report', async (req, res) => {
+    try {
+        const result = await runPythonModel('analyze_report', req.body);
+        res.json(result);
+    } catch (e) {
+        console.error("Analyze Report Error:", e.message);
+        res.status(500).json({ 
+            error: "AI Engine Failed. Please check the backend terminal for details.",
+            risk_level: "Error",
+            risk_score: 0,
+            summary: "System could not process the report."
+        });
+    }
 });
 
 // ... (Keep existing imports and analyze_report route)
