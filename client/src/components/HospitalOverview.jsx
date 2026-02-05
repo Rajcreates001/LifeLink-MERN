@@ -3,7 +3,7 @@ import {
     PieChart, Pie, Cell, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend 
 } from 'recharts';
 
-const API_BASE = '${import.meta.env.VITE_API_URL}/api/dashboard/hospital';
+const API_BASE = `${import.meta.env.VITE_API_URL}/api/dashboard/hospital`;
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
 
 const HospitalOverview = () => {

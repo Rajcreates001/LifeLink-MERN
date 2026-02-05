@@ -191,7 +191,7 @@ const AmbulanceETARoute = ({ currentHospitalId, currentHospitalName, hospitalLoc
     const fetchAmbulances = async () => {
         try {
             // Always fetch all ambulances (hospital filter handled on backend)
-            const url = '${import.meta.env.VITE_API_URL}/api/ambulance';
+            const url = `${import.meta.env.VITE_API_URL}/api/ambulance`;
 
             const response = await fetch(url);
             
@@ -674,7 +674,7 @@ const AmbulanceETARoute = ({ currentHospitalId, currentHospitalName, hospitalLoc
 
         setLoading(true);
         try {
-            const response = await fetch('${import.meta.env.VITE_API_URL}/api/ambulance/create', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/ambulance/create`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { DashboardCard, Input, ProgressBar } from './Common';
 import { Line } from 'react-chartjs-2';
 
-const API_BASE_URL = '${import.meta.env.VITE_API_URL}';
+const API_BASE_URL = `${import.meta.env.VITE_API_URL}`;
 
 // --- 1. Outbreak Forecast Chart ---
 export const OutbreakForecast = () => {

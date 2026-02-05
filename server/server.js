@@ -17,9 +17,27 @@ connectDB();
 
 const app = express();
 
+// Enhanced CORS Configuration for Vercel Deployment
+const corsOptions = {
+    origin: process.env.NODE_ENV === 'production' 
+        ? [process.env.FRONTEND_URL || 'https://your-vercel-frontend.vercel.app']
+        : ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:5174'],
+    credentials: true,
+    optionsSuccessStatus: 200
+};
+
 // Middleware
-app.use(cors());
-app.use(express.json());
+app.use(cors(corsOptions));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
+
+// Error handling middleware for JSON parsing
+app.use((err, req, res, next) => {
+    if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
+        return res.status(400).json({ error: 'Invalid JSON in request body' });
+    }
+    next();
+});
 
 // --- ROUTES ---
 app.use('/api/auth', require('./routes/authRoutes'));

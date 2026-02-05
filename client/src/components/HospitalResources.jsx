@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'; // <--- NEW IMPORT FOR PORTAL
 import { useAuth } from '../context/AuthContext';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, CartesianGrid } from 'recharts';
 
-const API_BASE = '${import.meta.env.VITE_API_URL}/api';
+const API_BASE = `${import.meta.env.VITE_API_URL}/api`;
 const COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#6366f1', '#14b8a6'];
 
 const MOCK_RESOURCES = [

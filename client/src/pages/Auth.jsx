@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Input } from '../components/Common';
 
-const API_BASE_URL = '${import.meta.env.VITE_API_URL}'; // Ensure this matches your backend port
+const API_BASE_URL = `${import.meta.env.VITE_API_URL}`; // Ensure this matches your backend port
 
 const AuthPage = ({ isSignup }) => {
   const navigate = useNavigate();

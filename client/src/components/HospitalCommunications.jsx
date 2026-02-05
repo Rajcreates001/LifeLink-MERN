@@ -297,7 +297,7 @@ const HospitalCommunicationsContent = ({ currentHospitalId, currentHospitalName 
 
       console.log('[handleSendMessage] Payload:', payload);
 
-      const response = await fetch('${import.meta.env.VITE_API_URL}/api/hospital-communication/send-message', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/hospital-communication/send-message`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

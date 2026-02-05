@@ -6,7 +6,7 @@ import { Line } from 'react-chartjs-2';
 // Register ChartJS components
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-const API_BASE_URL = '${import.meta.env.VITE_API_URL}';
+const API_BASE_URL = `${import.meta.env.VITE_API_URL}`;
 
 // --- 1. Ambulance ETA Predictor ---
 export const AmbulanceETAPredictor = ({ hospitalName }) => {

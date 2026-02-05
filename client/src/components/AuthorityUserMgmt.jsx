@@ -7,7 +7,7 @@ const AuthorityUserMgmt = () => {
 
     const fetchPending = async () => {
         try {
-            const res = await fetch('${import.meta.env.VITE_API_URL}/api/dashboard/admin/pending-hospitals');
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/dashboard/admin/pending-hospitals`);
             const data = await res.json();
             setPending(data);
         } catch (err) { console.error(err); } 

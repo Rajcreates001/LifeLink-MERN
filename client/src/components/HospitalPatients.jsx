@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'; // <--- 1. NEW IMPORT
 import { useAuth } from '../context/AuthContext';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
-const API_BASE = '${import.meta.env.VITE_API_URL}/api';
+const API_BASE = `${import.meta.env.VITE_API_URL}/api`;
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
 
 // Mock Data

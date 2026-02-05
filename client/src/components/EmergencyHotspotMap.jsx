@@ -4,7 +4,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { DashboardCard, LoadingSpinner } from './Common';
 
-const API_BASE_URL = '${import.meta.env.VITE_API_URL}';
+const API_BASE_URL = `${import.meta.env.VITE_API_URL}`;
 
 // Custom icons for density levels
 const createIcon = (color) => new L.DivIcon({
