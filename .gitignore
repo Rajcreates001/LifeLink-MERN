@@ -9,7 +9,3 @@ build/
 dist/
 
 # ignore only ML datasets
-server/ml/*.csv
-server/ml/*.xlsx
-server/ml/*.json
-server/ml/*.zip
