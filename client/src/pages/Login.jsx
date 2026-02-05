@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../config/api';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -19,13 +20,17 @@ const Login = () => {
     setLoading(true);
 
     try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
+        if (!API_BASE_URL) {
+            setError('API URL not configured. Set VITE_API_URL in Vercel to your Render backend URL.');
+            return;
+        }
+        const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
         });
 
-        const data = await res.json();
+        const data = await res.json().catch(() => ({}));
 
         if (!res.ok) throw new Error(data.message || 'Login failed');
 
@@ -44,7 +49,10 @@ const Login = () => {
         else navigate('/dashboard/public');
 
     } catch (err) {
-        setError(err.message);
+        const msg = err.message || '';
+        setError(msg === 'Failed to fetch'
+            ? 'Cannot reach server. Check VITE_API_URL in Vercel (your Render backend URL) and CORS/FRONTEND_URL on Render.'
+            : msg);
     } finally {
         setLoading(false);
     }

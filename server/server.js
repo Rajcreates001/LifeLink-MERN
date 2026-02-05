@@ -17,11 +17,28 @@ connectDB();
 
 const app = express();
 
-// Enhanced CORS Configuration for Vercel Deployment
+// CORS: Vercel (frontend) + Render (backend). Set FRONTEND_URL on Render to your Vercel URL.
+const devOrigins = ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:5174', 'http://127.0.0.1:5173'];
+const prodOrigins = (process.env.FRONTEND_URL || '')
+    .split(',')
+    .map(s => s.trim().replace(/\/+$/, ''))
+    .filter(Boolean);
+if (process.env.NODE_ENV === 'production' && prodOrigins.length === 0) {
+    console.warn('CORS: FRONTEND_URL not set. Set it on Render to your Vercel frontend URL (e.g. https://yourapp.vercel.app).');
+}
+const allowedOrigins = process.env.NODE_ENV === 'production' ? prodOrigins : devOrigins;
 const corsOptions = {
-    origin: process.env.NODE_ENV === 'production' 
-        ? [process.env.FRONTEND_URL || 'https://your-vercel-frontend.vercel.app']
-        : ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:5174'],
+    origin: (origin, callback) => {
+        // Allow requests with no origin (e.g. Postman, same-origin)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.length === 0) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) !== -1) return callback(null, true);
+        // Allow any Vercel preview/origin when we have at least one FRONTEND_URL (optional)
+        if (allowedOrigins.some(allowed => allowed.includes('vercel.app')) && origin.endsWith('.vercel.app')) {
+            return callback(null, true);
+        }
+        callback(new Error('Not allowed by CORS'));
+    },
     credentials: true,
     optionsSuccessStatus: 200
 };
